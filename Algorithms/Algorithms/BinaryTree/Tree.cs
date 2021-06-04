@@ -33,9 +33,9 @@ namespace Algorithms.BinaryTree
         private void GetValuesInOrder(TreeNode node = null)
         {
             if (node != null)
-            {                
+            {
                 GetValuesInOrder(node.LeftChild);
-                nodesInOrder.Add(node.Value);
+                nodesInOrder.Add(node.Value);             
                 GetValuesInOrder(node.RightChild);
             }
         }
@@ -77,6 +77,7 @@ namespace Algorithms.BinaryTree
                         auxNode = auxNode.LeftChild;
                         if (auxNode == null)
                         {
+                            newNode.Parent = parentNode;
                             parentNode.LeftChild = newNode;
                             nodesCount++;
                             return;
@@ -87,6 +88,7 @@ namespace Algorithms.BinaryTree
                         auxNode = auxNode.RightChild;
                         if (auxNode == null)
                         {
+                            newNode.Parent = parentNode;
                             parentNode.RightChild = newNode;
                             nodesCount++;
                             return;
@@ -97,8 +99,6 @@ namespace Algorithms.BinaryTree
             }
 
         }
-
-
 
     }
 }

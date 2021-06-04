@@ -7,6 +7,8 @@ namespace Algorithms
     {
         static void Main(string[] args)
         {
+
+            //Using the Tree structure
             Tree tree = new Tree();
   
             tree.Add(4);
@@ -18,7 +20,7 @@ namespace Algorithms
             tree.Add(9);
 
             var nodeValues = tree.NodesInOrder;
-            var newRoot = tree.InvertTree(tree.Root);
+            tree.InvertTree(tree.Root);
            
             var newNodesValues = tree.NodesInOrder;
             Console.ReadKey();
