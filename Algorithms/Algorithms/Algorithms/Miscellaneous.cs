@@ -84,9 +84,125 @@ namespace Algorithms.Algorithms
                 int currentNum = nums[i];
                 if (recordedNums.ContainsKey(currentNum))
                     return true;
-                recordedNums.Add(currentNum,1);
+                recordedNums.Add(currentNum, 1);
             }
             return false;
+        }
+
+        /// <summary>
+        /// Function that takes an array or list of chars, and returns a concatenated string for example:
+        /// Input : ['J', 'a', 'n', 'e', ' ', 'D', 'o', 'e'] Output : Jane Doe
+        /// </summary>
+        /// <param name="chars"></param>
+        /// <returns></returns>
+        public string ConcatChars(char[] chars)
+        {
+            string word = string.Join("", chars);
+            return word;
+        }
+
+        /// <summary>
+        /// Function that takes an array or list of chars, and returns a concatenated string using loop. for example:
+        /// Input : ['J', 'a', 'n', 'e', ' ', 'D', 'o', 'e'] Output : Jane Doe
+        /// </summary>
+        /// <param name="chars"></param>
+        /// <returns></returns>
+        public string ConcatCharsLoop(char[] chars)
+        {
+            string word = "";
+            foreach (char c in chars)
+                word += c;
+            return word;
+        }
+
+        /// <summary>
+        /// Reverses an array of char’s Input : ['J', 'a', 'n', 'e', ' ', 'D', 'o', 'e'] 
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <returns></returns>
+        public char[] ReverseArray(char[] elements)
+        {
+            var result = elements.Reverse();
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// Reverses an array of char’s using loop. Input : ['J', 'a', 'n', 'e', ' ', 'D', 'o', 'e'] 
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <returns></returns>
+        public char[] ReverseArrayLoop(char[] elements)
+        {
+            char[] reversedArray = new char[elements.Length];
+            int limit = elements.Length - 1;
+            for(int i =0; i < elements.Length; i++)
+            {
+                reversedArray[i] = elements[limit - i];
+            }
+
+            return reversedArray;
+        }
+
+        /// <summary>
+        /// Reverses an array of char’s using loop. Input : ['J', 'a', 'n', 'e', ' ', 'D', 'o', 'e'] 
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <returns></returns>
+        public string ReverseConcatenatedArray(char[] elements)
+        {
+            string result = ConcatChars(elements);
+            result += ConcatChars(ReverseArrayLoop(elements));
+
+            return result;
+        }
+        /// <summary>
+        /// Find first non-repeating character using loop: For e.g. Input = aaabbbcdddefefef Output = c 
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <returns></returns>
+        public char FirstNonRepeatingCharLoop(string elements)
+        {            
+            foreach(char c in elements)
+            {
+                if (elements.Where(x => x == c).Count() == 1)
+                    return c;
+            }
+            return ' ';
+        }
+
+        /// <summary>
+        /// Find first non-repeating character without loop: For e.g. Input = aaabbbcdddefefef Output = c 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public char FirstNonRepeatingChar(string text)
+        {
+            var groupedElements = text.GroupBy(c => c);
+            var t =  groupedElements.FirstOrDefault(x => x.Count() == 1);
+            return t?.Key ?? ' '; 
+        }
+
+        /// <summary>
+        /// Find the min and max element in an array Input without loop: [54, 32, 20, 80, 25, 7, 47] Output : Min 7 Max 80 
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
+        public object MinAndMaxNumber(int[] numbers)
+        {
+            var result = new { Min = numbers.Min(), Max = numbers.Max() };
+            return result;
+        }
+
+        /// <summary>
+        /// Find the min and max element in an array Input without loop: [54, 32, 20, 80, 25, 7, 47] Output : Min 7 Max 80 
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
+        public object MinAndMaxNumberLoop(int[] numbers)
+        {
+            int[] orderedNumbers = numbers.OrderBy(n => n).ToArray();
+            var result = new {Min = orderedNumbers[0], Max = orderedNumbers[orderedNumbers.Length -1] };
+            return result;
         }
     }
 }
