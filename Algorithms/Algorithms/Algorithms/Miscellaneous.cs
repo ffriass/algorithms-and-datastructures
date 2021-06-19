@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Algorithms.BinaryTree;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -135,7 +136,7 @@ namespace Algorithms.Algorithms
         {
             char[] reversedArray = new char[elements.Length];
             int limit = elements.Length - 1;
-            for(int i =0; i < elements.Length; i++)
+            for (int i = 0; i < elements.Length; i++)
             {
                 reversedArray[i] = elements[limit - i];
             }
@@ -161,8 +162,8 @@ namespace Algorithms.Algorithms
         /// <param name="elements"></param>
         /// <returns></returns>
         public char FirstNonRepeatingCharLoop(string elements)
-        {            
-            foreach(char c in elements)
+        {
+            foreach (char c in elements)
             {
                 if (elements.Where(x => x == c).Count() == 1)
                     return c;
@@ -178,8 +179,8 @@ namespace Algorithms.Algorithms
         public char FirstNonRepeatingChar(string text)
         {
             var groupedElements = text.GroupBy(c => c);
-            var t =  groupedElements.FirstOrDefault(x => x.Count() == 1);
-            return t?.Key ?? ' '; 
+            var t = groupedElements.FirstOrDefault(x => x.Count() == 1);
+            return t?.Key ?? ' ';
         }
 
         /// <summary>
@@ -201,8 +202,86 @@ namespace Algorithms.Algorithms
         public object MinAndMaxNumberLoop(int[] numbers)
         {
             int[] orderedNumbers = numbers.OrderBy(n => n).ToArray();
-            var result = new {Min = orderedNumbers[0], Max = orderedNumbers[orderedNumbers.Length -1] };
+            var result = new { Min = orderedNumbers[0], Max = orderedNumbers[orderedNumbers.Length - 1] };
             return result;
+        }
+
+        /// <summary>
+        /// You have a collection of numbers 1 to 100
+        ///I want you to cycle throw this collection and output the following:
+        ///If the number is evenly divisible by 3, output the word "Fizz"
+        ///If the number is evenly divisible by 5, output the word "Buzz"
+        ///For each number that is evenly divisible by both 3 and 5, output the word "FizzBuzz"
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
+        public void FizzBuzz(int[] numbers)
+        {
+            foreach (int num in numbers)
+            {               
+                Console.WriteLine(FizzBuzzMessage(num));
+            }
+        }
+
+        /// <summary>
+        /// You have a collection of numbers 1 to 100
+        ///I want you to cycle throw this collection and output the following:
+        ///If the number is evenly divisible by 3, output the word "Fizz"
+        ///If the number is evenly divisible by 5, output the word "Buzz"
+        ///For each number that is evenly divisible by both 3 and 5, output the word "FizzBuzz"
+        ///Do it without an Array
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
+        public void FizzBuzz(int maxNumber)
+        {
+            for (int num = 1; num <= maxNumber; num++)
+            {
+                Console.WriteLine(FizzBuzzMessage(num));
+            }
+        }
+
+        bool IsDivisible(int number, int divisor)
+        {
+            return number == 0 ? false : (number % divisor == 0) ? true : false;
+            if (number == 0)
+                return false;
+            else if (number % divisor == 0)
+                return true;
+            return false;
+        }
+
+        public string FizzBuzzMessage(int number)
+        {          
+
+           if (IsDivisible(number, 3) && IsDivisible(number, 5))
+                return  "FizzBuzz";
+            else if (IsDivisible(number, 3))
+                return "Fizz";
+            else if (IsDivisible(number, 5))
+                return "Buzz";
+            else
+                return number.ToString();         
+        }
+
+        /// <summary>
+        /// The user will input a string and we need to print “Palindrome” or “Not Palindrome” based on whether the input string is a palindrome or not. 
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns><see cref="bool"/></returns>
+        public bool IsPalindrome(string word)
+        {
+            int size = word.Length - 1;
+
+            for (int i = 0; i <= size; i++)
+            {
+                if (word[i] != word[size - i])
+                    return false;
+
+                if (i >= (size - i))
+                    break;
+            }
+            return true;
         }
     }
 }
